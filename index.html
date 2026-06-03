@@ -1,0 +1,1214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AI in DevOps | QuanSkill Course Proposal</title>
+  <meta name="description" content="Professional course proposal for QuanSkill: AI in DevOps, Intelligent Automation, AIOps, and Cloud-Native SRE." />
+  <style>
+    :root {
+      --bg: #070a13;
+      --bg-2: #0b1020;
+      --panel: rgba(15, 23, 42, 0.78);
+      --panel-2: rgba(17, 24, 39, 0.92);
+      --line: rgba(148, 163, 184, 0.22);
+      --text: #eef6ff;
+      --muted: #a9b7cc;
+      --muted-2: #7f8ea7;
+      --cyan: #20e3ff;
+      --blue: #4f8cff;
+      --purple: #8b5cf6;
+      --orange: #ff9f43;
+      --green: #25e6a7;
+      --red: #ff6b7a;
+      --shadow: 0 24px 80px rgba(0, 0, 0, .45);
+      --radius: 24px;
+      --radius-sm: 16px;
+      --max: 1180px;
+    }
+
+    * { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at 20% -10%, rgba(32, 227, 255, .28), transparent 30%),
+        radial-gradient(circle at 82% 4%, rgba(139, 92, 246, .30), transparent 34%),
+        radial-gradient(circle at 50% 50%, rgba(255, 159, 67, .07), transparent 36%),
+        linear-gradient(180deg, #080b16 0%, #080d18 42%, #060912 100%);
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background-image:
+        linear-gradient(rgba(255,255,255,.035) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,.035) 1px, transparent 1px);
+      background-size: 44px 44px;
+      mask-image: linear-gradient(180deg, rgba(0,0,0,.65), transparent 85%);
+      z-index: 0;
+    }
+
+    body::after {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background: radial-gradient(circle at center, transparent 0, rgba(0,0,0,.45) 100%);
+      z-index: 0;
+    }
+
+    a { color: inherit; text-decoration: none; }
+
+    .page { position: relative; z-index: 1; }
+
+    .container { max-width: var(--max); margin: 0 auto; padding: 0 24px; }
+
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      backdrop-filter: blur(18px);
+      background: rgba(7, 10, 19, .78);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .nav-inner {
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 14px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 800;
+      letter-spacing: .2px;
+    }
+
+    .brand-mark {
+      width: 42px;
+      height: 42px;
+      border-radius: 14px;
+      display: grid;
+      place-items: center;
+      color: #08111e;
+      font-weight: 950;
+      background: conic-gradient(from 220deg, var(--cyan), var(--blue), var(--purple), var(--orange), var(--cyan));
+      box-shadow: 0 0 34px rgba(32, 227, 255, .30);
+    }
+
+    .brand small {
+      display: block;
+      color: var(--muted);
+      font-weight: 600;
+      font-size: 12px;
+      margin-top: 2px;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .nav-links a {
+      padding: 9px 11px;
+      border-radius: 999px;
+      transition: .2s ease;
+    }
+
+    .nav-links a:hover { color: var(--text); background: rgba(255,255,255,.06); }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 9px;
+      border: 1px solid rgba(255,255,255,.16);
+      border-radius: 999px;
+      padding: 12px 18px;
+      font-weight: 750;
+      color: var(--text);
+      background: rgba(255,255,255,.06);
+      box-shadow: 0 12px 35px rgba(0,0,0,.18);
+      transition: transform .2s ease, border-color .2s ease, background .2s ease;
+      cursor: pointer;
+      font-family: inherit;
+    }
+
+    .btn:hover { transform: translateY(-2px); background: rgba(255,255,255,.10); border-color: rgba(32,227,255,.45); }
+
+    .btn-primary {
+      border: 0;
+      color: #06101d;
+      background: linear-gradient(135deg, var(--cyan), #7df5d0 48%, var(--orange));
+      box-shadow: 0 18px 55px rgba(32, 227, 255, .20), 0 12px 40px rgba(255, 159, 67, .16);
+    }
+
+    .btn-primary:hover { background: linear-gradient(135deg, #74efff, #8ff9df 48%, #ffb96f); }
+
+    .hero { padding: 78px 0 34px; }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.05fr) minmax(360px, .95fr);
+      gap: 42px;
+      align-items: center;
+    }
+
+    .eyebrow {
+      width: fit-content;
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      padding: 8px 12px;
+      border: 1px solid rgba(32, 227, 255, .28);
+      border-radius: 999px;
+      color: #ccf8ff;
+      background: rgba(32, 227, 255, .075);
+      font-weight: 720;
+      font-size: 13px;
+      letter-spacing: .2px;
+      margin-bottom: 22px;
+    }
+
+    .pulse {
+      width: 8px; height: 8px; border-radius: 999px; background: var(--green);
+      box-shadow: 0 0 0 7px rgba(37, 230, 167, .12), 0 0 22px rgba(37, 230, 167, .85);
+    }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(42px, 7vw, 82px);
+      line-height: .95;
+      letter-spacing: -3px;
+      max-width: 820px;
+    }
+
+    .grad {
+      background: linear-gradient(135deg, #fff 0%, #d9fbff 18%, var(--cyan) 44%, #c9b6ff 70%, #ffd59a 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .hero-sub {
+      margin: 24px 0 0;
+      color: var(--muted);
+      font-size: 19px;
+      line-height: 1.72;
+      max-width: 760px;
+    }
+
+    .hero-actions { margin-top: 30px; display: flex; flex-wrap: wrap; gap: 14px; align-items: center; }
+
+    .trust-row {
+      margin-top: 30px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .trust-pill {
+      padding: 9px 12px;
+      color: #dbeafe;
+      border: 1px solid rgba(148,163,184,.18);
+      background: rgba(15, 23, 42, .62);
+      border-radius: 999px;
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    .hero-card {
+      position: relative;
+      border: 1px solid rgba(148, 163, 184, .18);
+      background:
+        linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.03)),
+        rgba(15, 23, 42, .72);
+      box-shadow: var(--shadow), inset 0 1px 0 rgba(255,255,255,.08);
+      border-radius: 30px;
+      overflow: hidden;
+      min-height: 560px;
+    }
+
+    .hero-card::before {
+      content: "";
+      position: absolute;
+      inset: -2px;
+      background: radial-gradient(circle at 25% 18%, rgba(32,227,255,.32), transparent 30%), radial-gradient(circle at 80% 0%, rgba(139,92,246,.30), transparent 24%);
+      pointer-events: none;
+    }
+
+    .dashboard {
+      position: relative;
+      padding: 24px;
+      min-height: 560px;
+    }
+
+    .terminal {
+      border: 1px solid rgba(255,255,255,.12);
+      background: rgba(2, 6, 23, .78);
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 20px 70px rgba(0,0,0,.35);
+    }
+
+    .terminal-top {
+      height: 44px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 0 16px;
+      border-bottom: 1px solid rgba(255,255,255,.10);
+      color: var(--muted-2);
+      font-size: 12px;
+    }
+
+    .dot { width: 10px; height: 10px; border-radius: 999px; display: inline-block; }
+    .dot.red { background: #ff5f57; }
+    .dot.yellow { background: #ffbd2e; }
+    .dot.green { background: #28c840; }
+
+    .code {
+      padding: 18px 18px 20px;
+      font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+      font-size: 13px;
+      line-height: 1.72;
+      color: #b8f7ff;
+      min-height: 180px;
+    }
+
+    .code .muted { color: #718096; }
+    .code .ok { color: var(--green); }
+    .code .warn { color: var(--orange); }
+    .code .ai { color: #d8c7ff; }
+
+    .float-card {
+      position: absolute;
+      border: 1px solid rgba(255,255,255,.13);
+      border-radius: 20px;
+      background: rgba(8, 13, 28, .76);
+      backdrop-filter: blur(18px);
+      box-shadow: 0 18px 45px rgba(0,0,0,.32);
+      padding: 16px;
+      overflow: hidden;
+    }
+
+    .float-card h4 { margin: 0 0 8px; font-size: 14px; }
+    .float-card p { margin: 0; color: var(--muted); font-size: 12px; line-height: 1.5; }
+
+    .card-ci { width: 242px; right: 22px; top: 236px; }
+    .card-ai { width: 248px; left: 24px; bottom: 24px; }
+    .card-k8s { width: 218px; right: 28px; bottom: 84px; }
+
+    .mini-bars { margin-top: 12px; display: grid; gap: 8px; }
+    .bar { height: 8px; border-radius: 999px; background: rgba(148,163,184,.16); overflow: hidden; }
+    .bar span { display: block; height: 100%; border-radius: 999px; background: linear-gradient(90deg, var(--cyan), var(--purple)); }
+
+    .circuit {
+      position: absolute;
+      inset: auto 30px 150px auto;
+      width: 300px;
+      opacity: .92;
+      filter: drop-shadow(0 20px 40px rgba(32,227,255,.18));
+    }
+
+    section { padding: 60px 0; }
+
+    .section-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: end;
+      gap: 24px;
+      margin-bottom: 28px;
+    }
+
+    .kicker {
+      color: var(--cyan);
+      text-transform: uppercase;
+      letter-spacing: .17em;
+      font-size: 12px;
+      font-weight: 900;
+      margin-bottom: 12px;
+    }
+
+    h2 {
+      margin: 0;
+      font-size: clamp(30px, 4vw, 48px);
+      line-height: 1.05;
+      letter-spacing: -1.7px;
+    }
+
+    .section-head p, .lead {
+      color: var(--muted);
+      line-height: 1.72;
+      font-size: 16px;
+      max-width: 610px;
+      margin: 0;
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+      margin-top: 28px;
+    }
+
+    .stat {
+      position: relative;
+      padding: 22px;
+      border: 1px solid var(--line);
+      background: linear-gradient(180deg, rgba(255,255,255,.075), rgba(255,255,255,.03));
+      border-radius: var(--radius-sm);
+      overflow: hidden;
+    }
+
+    .stat::after {
+      content: "";
+      position: absolute;
+      width: 90px; height: 90px;
+      right: -28px; top: -36px;
+      background: radial-gradient(circle, rgba(32,227,255,.20), transparent 68%);
+    }
+
+    .stat strong {
+      display: block;
+      font-size: 34px;
+      letter-spacing: -1px;
+      margin-bottom: 4px;
+      background: linear-gradient(135deg, #fff, var(--cyan));
+      -webkit-background-clip: text;
+      color: transparent;
+    }
+
+    .stat span { color: var(--muted); font-size: 14px; line-height: 1.45; }
+
+    .panel {
+      border: 1px solid var(--line);
+      background:
+        linear-gradient(180deg, rgba(255,255,255,.07), rgba(255,255,255,.025)),
+        rgba(15, 23, 42, .65);
+      border-radius: var(--radius);
+      box-shadow: 0 20px 70px rgba(0,0,0,.22);
+      overflow: hidden;
+    }
+
+    .track-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+    }
+
+    .track {
+      min-height: 260px;
+      padding: 24px;
+      border: 1px solid var(--line);
+      background: rgba(15, 23, 42, .55);
+      border-radius: var(--radius-sm);
+      position: relative;
+      overflow: hidden;
+      transition: transform .2s ease, border-color .2s ease, background .2s ease;
+    }
+
+    .track:hover { transform: translateY(-4px); border-color: rgba(32,227,255,.38); background: rgba(15, 23, 42, .78); }
+
+    .track::before {
+      content: attr(data-step);
+      position: absolute;
+      right: 18px;
+      top: 12px;
+      font-size: 72px;
+      font-weight: 950;
+      color: rgba(255,255,255,.035);
+      letter-spacing: -5px;
+    }
+
+    .icon {
+      width: 50px;
+      height: 50px;
+      border-radius: 16px;
+      display: grid;
+      place-items: center;
+      margin-bottom: 18px;
+      background: linear-gradient(135deg, rgba(32,227,255,.18), rgba(139,92,246,.18));
+      border: 1px solid rgba(255,255,255,.10);
+      font-size: 23px;
+    }
+
+    .track h3, .card h3 { margin: 0 0 12px; font-size: 20px; line-height: 1.2; }
+    .track p, .card p { margin: 0; color: var(--muted); line-height: 1.65; font-size: 14px; }
+
+    .journey {
+      padding: 30px;
+      display: grid;
+      grid-template-columns: .9fr 1.1fr;
+      gap: 28px;
+      align-items: center;
+    }
+
+    .pathway {
+      display: grid;
+      gap: 14px;
+    }
+
+    .path-step {
+      display: grid;
+      grid-template-columns: 48px 1fr;
+      gap: 14px;
+      align-items: start;
+      padding: 16px;
+      border-radius: 18px;
+      background: rgba(2, 6, 23, .34);
+      border: 1px solid rgba(255,255,255,.10);
+    }
+
+    .path-num {
+      width: 42px; height: 42px;
+      border-radius: 14px;
+      display: grid;
+      place-items: center;
+      background: linear-gradient(135deg, var(--cyan), var(--purple));
+      color: #050b14;
+      font-weight: 950;
+    }
+
+    .path-step h4 { margin: 0 0 5px; }
+    .path-step p { margin: 0; color: var(--muted); line-height: 1.55; font-size: 14px; }
+
+    .modules {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+
+    details.module {
+      border: 1px solid var(--line);
+      background: rgba(15, 23, 42, .55);
+      border-radius: 18px;
+      overflow: hidden;
+      transition: border-color .2s ease, transform .2s ease;
+    }
+
+    details.module:hover { border-color: rgba(32,227,255,.34); transform: translateY(-2px); }
+
+    details.module summary {
+      list-style: none;
+      cursor: pointer;
+      padding: 18px 18px 16px;
+      min-height: 116px;
+    }
+
+    details.module summary::-webkit-details-marker { display: none; }
+
+    .module-top {
+      display: flex;
+      justify-content: space-between;
+      gap: 14px;
+      align-items: flex-start;
+    }
+
+    .module-id {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 9px;
+      border-radius: 999px;
+      color: #c6fbff;
+      background: rgba(32, 227, 255, .09);
+      border: 1px solid rgba(32, 227, 255, .22);
+      font-size: 12px;
+      font-weight: 850;
+      margin-bottom: 12px;
+    }
+
+    .module h3 { margin: 0; font-size: 17px; line-height: 1.32; }
+
+    .chev {
+      width: 30px; height: 30px;
+      display: grid;
+      place-items: center;
+      flex: 0 0 auto;
+      border-radius: 999px;
+      background: rgba(255,255,255,.07);
+      color: var(--muted);
+      transition: transform .2s ease;
+    }
+
+    details[open] .chev { transform: rotate(45deg); color: var(--cyan); }
+
+    .module-body {
+      padding: 0 18px 18px;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.65;
+    }
+
+    .module-body ul { margin: 10px 0 0; padding-left: 18px; }
+    .module-body li { margin: 6px 0; }
+
+    .tools-wrap {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 14px;
+    }
+
+    .tool-category {
+      padding: 18px;
+      border-radius: 18px;
+      border: 1px solid var(--line);
+      background: rgba(15, 23, 42, .52);
+    }
+
+    .tool-category h4 { margin: 0 0 12px; font-size: 15px; }
+
+    .chips { display: flex; flex-wrap: wrap; gap: 8px; }
+
+    .chip {
+      display: inline-flex;
+      align-items: center;
+      padding: 7px 9px;
+      border-radius: 999px;
+      color: #dbeafe;
+      background: rgba(255,255,255,.065);
+      border: 1px solid rgba(255,255,255,.10);
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .feature-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+
+    .card {
+      padding: 24px;
+      border: 1px solid var(--line);
+      background: rgba(15, 23, 42, .54);
+      border-radius: var(--radius-sm);
+      min-height: 220px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .card::after {
+      content: "";
+      position: absolute;
+      width: 120px; height: 120px;
+      border-radius: 999px;
+      right: -50px; bottom: -60px;
+      background: radial-gradient(circle, rgba(139,92,246,.18), transparent 68%);
+    }
+
+    .card ul { margin: 12px 0 0; padding-left: 18px; color: var(--muted); line-height: 1.7; font-size: 14px; }
+
+    .capstone {
+      display: grid;
+      grid-template-columns: .95fr 1.05fr;
+      gap: 22px;
+      padding: 30px;
+      background:
+        radial-gradient(circle at 10% 20%, rgba(255,159,67,.15), transparent 35%),
+        radial-gradient(circle at 90% 10%, rgba(32,227,255,.16), transparent 35%),
+        rgba(15, 23, 42, .66);
+    }
+
+    .capstone h2 { margin-bottom: 14px; }
+
+    .capstone-list {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+      margin-top: 22px;
+    }
+
+    .capstone-item {
+      border: 1px solid rgba(255,255,255,.12);
+      background: rgba(2, 6, 23, .35);
+      border-radius: 14px;
+      padding: 12px;
+      color: #e7efff;
+      font-weight: 720;
+      font-size: 13px;
+    }
+
+    .architecture {
+      min-height: 430px;
+      display: grid;
+      place-items: center;
+      border-radius: 22px;
+      border: 1px solid rgba(255,255,255,.12);
+      background: rgba(2, 6, 23, .42);
+      overflow: hidden;
+    }
+
+    .rubric {
+      width: 100%;
+      border-collapse: collapse;
+      overflow: hidden;
+      border-radius: 18px;
+    }
+
+    .rubric th, .rubric td {
+      padding: 15px 16px;
+      text-align: left;
+      border-bottom: 1px solid rgba(255,255,255,.09);
+    }
+
+    .rubric th {
+      color: #06101d;
+      background: linear-gradient(135deg, var(--cyan), #9ff7da);
+      font-size: 13px;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+    }
+
+    .rubric td { color: var(--muted); background: rgba(15,23,42,.55); }
+    .rubric td:last-child { color: var(--text); font-weight: 850; }
+
+    .delivery {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+
+    .price-card {
+      padding: 24px;
+      border-radius: 22px;
+      border: 1px solid var(--line);
+      background: rgba(15,23,42,.55);
+      min-height: 260px;
+      position: relative;
+    }
+
+    .price-card.featured {
+      border-color: rgba(255,159,67,.45);
+      background: linear-gradient(180deg, rgba(255,159,67,.10), rgba(15,23,42,.55));
+      box-shadow: 0 20px 60px rgba(255,159,67,.08);
+    }
+
+    .label {
+      display: inline-flex;
+      margin-bottom: 16px;
+      padding: 6px 10px;
+      border-radius: 999px;
+      background: rgba(255,159,67,.12);
+      color: #ffd59a;
+      border: 1px solid rgba(255,159,67,.24);
+      font-size: 12px;
+      font-weight: 850;
+    }
+
+    .price-card h3 { margin: 0 0 10px; }
+    .price-card p { margin: 0; color: var(--muted); line-height: 1.65; font-size: 14px; }
+    .price-card ul { margin: 16px 0 0; padding-left: 18px; color: var(--muted); line-height: 1.8; font-size: 14px; }
+
+    .cta {
+      padding: 36px;
+      border-radius: 30px;
+      border: 1px solid rgba(32,227,255,.25);
+      background:
+        linear-gradient(135deg, rgba(32,227,255,.18), rgba(139,92,246,.12) 50%, rgba(255,159,67,.13)),
+        rgba(15,23,42,.68);
+      display: grid;
+      grid-template-columns: 1fr auto;
+      align-items: center;
+      gap: 20px;
+      box-shadow: var(--shadow);
+    }
+
+    .cta h2 { font-size: clamp(28px, 4vw, 44px); }
+    .cta p { color: var(--muted); line-height: 1.65; margin: 12px 0 0; max-width: 760px; }
+
+    .footer {
+      padding: 30px 0 48px;
+      color: var(--muted-2);
+      font-size: 13px;
+      border-top: 1px solid var(--line);
+    }
+
+    .footer-inner {
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    .print-note { display: none; }
+
+    @media (max-width: 1000px) {
+      .hero-grid, .journey, .capstone { grid-template-columns: 1fr; }
+      .track-grid, .stats { grid-template-columns: repeat(2, 1fr); }
+      .modules, .feature-grid, .delivery { grid-template-columns: repeat(2, 1fr); }
+      .tools-wrap { grid-template-columns: repeat(3, 1fr); }
+      .nav-links { display: none; }
+      .hero-card { min-height: 520px; }
+      .circuit { display: none; }
+    }
+
+    @media (max-width: 680px) {
+      .container, .nav-inner { padding-left: 16px; padding-right: 16px; }
+      .hero { padding-top: 48px; }
+      h1 { letter-spacing: -1.8px; }
+      .hero-sub { font-size: 16px; }
+      .track-grid, .stats, .modules, .feature-grid, .delivery, .tools-wrap, .capstone-list { grid-template-columns: 1fr; }
+      .hero-card { min-height: auto; }
+      .dashboard { min-height: auto; }
+      .float-card { position: relative; left: auto; right: auto; top: auto; bottom: auto; width: auto; margin-top: 14px; }
+      .cta { grid-template-columns: 1fr; }
+      .section-head { display: block; }
+      .section-head p { margin-top: 14px; }
+      .architecture { min-height: 320px; }
+    }
+
+    @media print {
+      body { background: #fff; color: #111827; }
+      body::before, body::after, .nav, .hero-card::before, .btn { display: none !important; }
+      .page { z-index: auto; }
+      .hero { padding-top: 20px; }
+      .panel, .track, .card, .stat, details.module, .tool-category, .price-card, .cta {
+        background: #fff !important;
+        color: #111827 !important;
+        box-shadow: none !important;
+        border: 1px solid #d1d5db !important;
+      }
+      .grad { color: #111827; background: none; -webkit-background-clip: initial; }
+      .muted, .lead, p, .track p, .card p, .module-body, .rubric td, .price-card p, .price-card ul, .card ul { color: #374151 !important; }
+      .print-note { display: block; color: #374151; }
+      section { padding: 24px 0; }
+      .hero-grid, .journey, .capstone, .track-grid, .modules, .feature-grid, .delivery, .stats, .tools-wrap { grid-template-columns: 1fr 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <nav class="nav">
+      <div class="nav-inner">
+        <a class="brand" href="#top" aria-label="QuanSkill AI in DevOps Proposal">
+          <span class="brand-mark">QS</span>
+          <span>QuanSkill<br><small>Advanced Course Proposal</small></span>
+        </a>
+        <div class="nav-links" aria-label="Page navigation">
+          <a href="#overview">Overview</a>
+          <a href="#curriculum">Curriculum</a>
+          <a href="#tools">Tools</a>
+          <a href="#capstone">Capstone</a>
+          <a href="#delivery">Delivery</a>
+        </div>
+        <button class="btn" onclick="window.print()">Print / Save PDF</button>
+      </div>
+    </nav>
+
+    <header id="top" class="hero">
+      <div class="container hero-grid">
+        <div>
+          <div class="eyebrow"><span class="pulse"></span> Advanced AI + DevOps Course Proposal</div>
+          <h1><span class="grad">AI in DevOps</span><br>Intelligent Automation, AIOps & Cloud-Native SRE</h1>
+          <p class="hero-sub">
+            A professional, project-based QuanSkill course that teaches learners how to combine DevOps, AI, observability, Kubernetes, CI/CD, security, and SRE automation into modern intelligent engineering workflows.
+          </p>
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="#curriculum">Explore Curriculum</a>
+            <a class="btn" href="#capstone">View Capstone</a>
+          </div>
+          <div class="trust-row">
+            <span class="trust-pill">12-week advanced pathway</span>
+            <span class="trust-pill">35+ hands-on labs</span>
+            <span class="trust-pill">6–8 mini projects</span>
+            <span class="trust-pill">Portfolio-ready capstone</span>
+          </div>
+        </div>
+
+        <div class="hero-card" aria-label="AI DevOps visual dashboard">
+          <div class="dashboard">
+            <div class="terminal">
+              <div class="terminal-top"><span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span><span style="margin-left:8px;">ai-devops-control-center</span></div>
+              <div class="code">
+                <span class="muted">$</span> qs-aiops analyze --pipeline failed-build-218<br>
+                <span class="ok">✓</span> CI logs parsed: 1,284 lines<br>
+                <span class="ok">✓</span> Container image scanned: no critical CVE<br>
+                <span class="warn">!</span> Root cause candidate: missing env variable<br>
+                <span class="ai">AI summary:</span> Deployment blocked at test stage. Add APP_SECRET to staging secrets and rerun workflow.<br>
+                <span class="muted">$</span> kubectl rollout status deployment/api<br>
+                <span class="ok">deployment/api successfully rolled out</span>
+              </div>
+            </div>
+
+            <svg class="circuit" viewBox="0 0 480 360" role="img" aria-label="AI DevOps neural pipeline illustration">
+              <defs>
+                <linearGradient id="g1" x1="0" x2="1" y1="0" y2="1">
+                  <stop offset="0" stop-color="#20e3ff"/>
+                  <stop offset=".52" stop-color="#8b5cf6"/>
+                  <stop offset="1" stop-color="#ff9f43"/>
+                </linearGradient>
+                <filter id="glow"><feGaussianBlur stdDeviation="3" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+              </defs>
+              <path d="M50 180 C120 40 220 70 250 160 C285 270 390 250 430 116" fill="none" stroke="url(#g1)" stroke-width="4" filter="url(#glow)"/>
+              <path d="M56 248 H136 V208 H218 V116 H300 V172 H424" fill="none" stroke="rgba(255,255,255,.26)" stroke-width="3"/>
+              <g fill="#07111e" stroke="url(#g1)" stroke-width="4" filter="url(#glow)">
+                <circle cx="50" cy="180" r="18"/><circle cx="136" cy="208" r="14"/><circle cx="218" cy="116" r="14"/><circle cx="300" cy="172" r="16"/><circle cx="430" cy="116" r="18"/>
+                <circle cx="250" cy="160" r="44"/>
+              </g>
+              <g fill="#dffbff" font-family="monospace" font-size="18" font-weight="800">
+                <text x="232" y="166">AI</text>
+                <text x="31" y="186">CI</text>
+                <text x="412" y="122">SRE</text>
+              </g>
+            </svg>
+
+            <div class="float-card card-ci">
+              <h4>Smart CI/CD Automation</h4>
+              <p>Build, test, scan, deploy, and summarize pipeline failures with AI-assisted troubleshooting.</p>
+              <div class="mini-bars"><div class="bar"><span style="width:82%"></span></div><div class="bar"><span style="width:64%"></span></div></div>
+            </div>
+
+            <div class="float-card card-ai">
+              <h4>AIOps Signal Intelligence</h4>
+              <p>Convert logs, alerts, metrics, and traces into actionable incident reports and runbook suggestions.</p>
+            </div>
+
+            <div class="float-card card-k8s">
+              <h4>Kubernetes + SRE</h4>
+              <p>Debug workloads, monitor reliability, and design safe human-approved automation.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <section id="overview">
+        <div class="container">
+          <div class="section-head">
+            <div>
+              <div class="kicker">Course Summary</div>
+              <h2>From traditional DevOps to intelligent, self-improving operations.</h2>
+            </div>
+            <p>
+              This advanced course helps learners master AI-powered automation, CI/CD intelligence, AIOps, observability, incident response, infrastructure intelligence, and cloud-native reliability engineering using free and open-source tools.
+            </p>
+          </div>
+          <div class="stats">
+            <div class="stat"><strong>12</strong><span>Weeks of structured live learning and guided project development</span></div>
+            <div class="stat"><strong>35+</strong><span>Hands-on labs across DevOps, AIOps, Kubernetes, MLOps, and security</span></div>
+            <div class="stat"><strong>8</strong><span>Career paths supported including DevOps, SRE, Platform, Cloud, AIOps</span></div>
+            <div class="stat"><strong>1</strong><span>Complete AI-powered DevOps Control Center capstone project</span></div>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <div class="container">
+          <div class="section-head">
+            <div>
+              <div class="kicker">Program Tracks</div>
+              <h2>A complete learning path for modern AI-powered engineering.</h2>
+            </div>
+            <p>The course is organized into four clear tracks so learners move from core systems to AI automation, AIOps, and portfolio-level capstone work.</p>
+          </div>
+          <div class="track-grid">
+            <article class="track" data-step="01">
+              <div class="icon">⚙️</div>
+              <h3>DevOps Core Systems</h3>
+              <p>Linux, Git, Docker, CI/CD, Infrastructure as Code, Kubernetes, and cloud-native fundamentals.</p>
+            </article>
+            <article class="track" data-step="02">
+              <div class="icon">🤖</div>
+              <h3>AI for DevOps Automation</h3>
+              <p>Use Python, LLMs, local AI models, and scripts for log analysis, config generation, and documentation automation.</p>
+            </article>
+            <article class="track" data-step="03">
+              <div class="icon">📡</div>
+              <h3>AIOps & Observability</h3>
+              <p>Build monitoring, logging, tracing, alerting, anomaly detection, and root-cause analysis systems.</p>
+            </article>
+            <article class="track" data-step="04">
+              <div class="icon">🚀</div>
+              <h3>Capstone & Career Readiness</h3>
+              <p>Deliver an AI-assisted DevOps platform pipeline with documentation, demo, and GitHub portfolio assets.</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <div class="container">
+          <div class="panel journey">
+            <div>
+              <div class="kicker">Learner Journey</div>
+              <h2>Designed for students, professionals, and future DevOps builders.</h2>
+              <p class="lead" style="margin-top:16px;">
+                The course is ideal for learners who already know basic Linux, Git, Python, Docker, or cloud concepts and want to become job-ready in DevOps, SRE, AIOps, MLOps, and infrastructure automation.
+              </p>
+            </div>
+            <div class="pathway">
+              <div class="path-step"><div class="path-num">1</div><div><h4>Before the course</h4><p>Python foundation, Linux basics, Git/GitHub, cloud basics, and DevOps foundation.</p></div></div>
+              <div class="path-step"><div class="path-num">2</div><div><h4>During the course</h4><p>CI/CD, Docker, Kubernetes, IaC, observability, AIOps, DevSecOps, MLOps, and DevOps AI assistant labs.</p></div></div>
+              <div class="path-step"><div class="path-num">3</div><div><h4>After the course</h4><p>Advanced Kubernetes, Platform Engineering, MLOps, SRE, Agentic AI automation, and cloud-native AI deployment.</p></div></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="curriculum">
+        <div class="container">
+          <div class="section-head">
+            <div>
+              <div class="kicker">Detailed Curriculum</div>
+              <h2>12 modules, practical labs, and mini projects.</h2>
+            </div>
+            <p>Each module combines concept learning, live lab work, AI integration, and GitHub-based deliverables.</p>
+          </div>
+
+          <div class="modules">
+            <details class="module" open>
+              <summary><div class="module-top"><div><span class="module-id">Module 0</span><h3>DevOps Foundation Bridge</h3></div><span class="chev">+</span></div></summary>
+              <div class="module-body">DevOps lifecycle, Linux essentials, GitHub workflow, YAML basics, and AI's role in DevOps. <ul><li>Set up local DevOps workspace</li><li>Create GitHub repository</li><li>Write first automation script</li></ul></div>
+            </details>
+            <details class="module">
+              <summary><div class="module-top"><div><span class="module-id">Module 1</span><h3>Linux, Bash & Python Automation</h3></div><span class="chev">+</span></div></summary>
+              <div class="module-body">Automate system checks, logs, APIs, cron jobs, and reports. <ul><li>Health-check scripts</li><li>Log cleanup automation</li><li>CPU, memory, and disk reporting</li></ul></div>
+            </details>
+            <details class="module">
+              <summary><div class="module-top"><div><span class="module-id">Module 2</span><h3>GitHub, CI/CD & Intelligent Pipelines</h3></div><span class="chev">+</span></div></summary>
+              <div class="module-body">Build CI/CD pipelines with testing, scanning, Docker build, deployment, and AI failure summaries. <ul><li>GitHub Actions</li><li>Pipeline debugging</li><li>AI-assisted failure reports</li></ul></div>
+            </details>
+            <details class="module">
+              <summary><div class="module-top"><div><span class="module-id">Module 3</span><h3>Docker & Container Intelligence</h3></div><span class="chev">+</span></div></summary>
+              <div class="module-body">Containerize apps, write Dockerfiles, use Compose, inspect logs, and review container security. <ul><li>Flask/FastAPI containerization</li><li>Docker Compose stack</li><li>AI Dockerfile optimization</li></ul></div>
+            </details>
+            <details class="module">
+              <summary><div class="module-top"><div><span class="module-id">Module 4</span><h3>Kubernetes for AI-Powered DevOps</h3></div><span class="chev">+</span></div></summary>
+              <div class="module-body">Deploy workloads with Minikube or Kind, use Helm, debug events, and build a Kubernetes troubleshooting assistant. <ul><li>Pods and deployments</li><li>Services and ingress</li><li>AI log/event explanations</li></ul></div>
+            </details>
+            <details class="module">
+              <summary><div class="module-top"><div><span class="module-id">Module 5</span><h3>IaC with OpenTofu/Terraform & Ansible</h3></div><span class="chev">+</span></div></summary>
+              <div class="module-body">Provision infrastructure, manage state, configure servers, and detect misconfigurations. <ul><li>OpenTofu/Terraform basics</li><li>Ansible playbooks</li><li>AI-assisted IaC review</li></ul></div>
+            </details>
+            <details class="module">
+              <summary><div class="module-top"><div><span class="module-id">Module 6</span><h3>Observability Fundamentals</h3></div><span class="chev">+</span></div></summary>
+              <div class="module-body">Metrics, logs, traces, SLI/SLO/SLA, RED/USE, Prometheus, Grafana, OpenTelemetry, and alerts. <ul><li>Dashboards</li><li>Alerting</li><li>Telemetry collection</li></ul></div>
+            </details>
+            <details class="module">
+              <summary><div class="module-top"><div><span class="module-id">Module 7</span><h3>AIOps: Logs, Anomaly Detection & RCA</h3></div><span class="chev">+</span></div></summary>
+              <div class="module-body">Parse logs, detect error spikes, build anomaly detection models, and generate incident summaries. <ul><li>Python log parser</li><li>Scikit-learn anomaly model</li><li>Incident report generator</li></ul></div>
+            </details>
+            <details class="module">
+              <summary><div class="module-top"><div><span class="module-id">Module 8</span><h3>AI-Assisted Incident Response & SRE</h3></div><span class="chev">+</span></div></summary>
+              <div class="module-body">Build runbooks, triage alerts, draft postmortems, and design AI-assisted incident workflows. <ul><li>Severity classification</li><li>Root-cause suggestions</li><li>Runbook recommendation</li></ul></div>
+            </details>
+            <details class="module">
+              <summary><div class="module-top"><div><span class="module-id">Module 9</span><h3>Secure AI in DevOps</h3></div><span class="chev">+</span></div></summary>
+              <div class="module-body">Prevent secret leakage, prompt injection, unsafe commands, and insecure generated scripts. <ul><li>Gitleaks and Trivy</li><li>Human approval gates</li><li>DevSecOps basics</li></ul></div>
+            </details>
+            <details class="module">
+              <summary><div class="module-top"><div><span class="module-id">Module 10</span><h3>MLOps & AI Model Deployment</h3></div><span class="chev">+</span></div></summary>
+              <div class="module-body">Train, package, containerize, deploy, monitor, and version ML models using DevOps principles. <ul><li>MLflow tracking</li><li>Model API deployment</li><li>Model monitoring</li></ul></div>
+            </details>
+            <details class="module">
+              <summary><div class="module-top"><div><span class="module-id">Module 11</span><h3>Building a DevOps AI Assistant</h3></div><span class="chev">+</span></div></summary>
+              <div class="module-body">Create a documentation-aware DevOps assistant with RAG, log summarization, guardrails, and response evaluation. <ul><li>Runbook search</li><li>Tool-use concept</li><li>Safety warning layer</li></ul></div>
+            </details>
+          </div>
+        </div>
+      </section>
+
+      <section id="tools">
+        <div class="container">
+          <div class="section-head">
+            <div>
+              <div class="kicker">Toolkit</div>
+              <h2>Free and open-source tools learners can actually practice with.</h2>
+            </div>
+            <p>No expensive vendor lock-in. Learners build professional workflows with accessible tools used across real engineering teams.</p>
+          </div>
+          <div class="tools-wrap">
+            <div class="tool-category"><h4>Core DevOps</h4><div class="chips"><span class="chip">Linux</span><span class="chip">Bash</span><span class="chip">Git</span><span class="chip">GitHub</span><span class="chip">GitHub Actions</span></div></div>
+            <div class="tool-category"><h4>Containers</h4><div class="chips"><span class="chip">Docker</span><span class="chip">Compose</span><span class="chip">Kubernetes</span><span class="chip">Minikube</span><span class="chip">Kind</span><span class="chip">Helm</span></div></div>
+            <div class="tool-category"><h4>IaC & Automation</h4><div class="chips"><span class="chip">OpenTofu</span><span class="chip">Terraform CE</span><span class="chip">Ansible</span><span class="chip">YAML</span><span class="chip">Makefile</span></div></div>
+            <div class="tool-category"><h4>Observability</h4><div class="chips"><span class="chip">Prometheus</span><span class="chip">Grafana</span><span class="chip">OpenTelemetry</span><span class="chip">Loki</span><span class="chip">Alertmanager</span></div></div>
+            <div class="tool-category"><h4>AI & Security</h4><div class="chips"><span class="chip">Python</span><span class="chip">Scikit-learn</span><span class="chip">MLflow</span><span class="chip">Ollama</span><span class="chip">Trivy</span><span class="chip">Gitleaks</span><span class="chip">Semgrep</span></div></div>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <div class="container">
+          <div class="section-head">
+            <div>
+              <div class="kicker">Outcomes & Benefits</div>
+              <h2>Clear career value for learners and strong platform value for QuanSkill.</h2>
+            </div>
+            <p>Every learner leaves with practical skills, real deliverables, and a professional project portfolio aligned with modern AI-enabled DevOps roles.</p>
+          </div>
+          <div class="feature-grid">
+            <article class="card"><div class="icon">🎯</div><h3>Learning Outcomes</h3><ul><li>Build CI/CD pipelines</li><li>Deploy Docker and Kubernetes workloads</li><li>Automate infrastructure</li><li>Monitor metrics, logs, and traces</li><li>Create AIOps anomaly detection workflows</li></ul></article>
+            <article class="card"><div class="icon">💼</div><h3>Career Pathways</h3><ul><li>DevOps Engineer</li><li>Cloud Engineer</li><li>Site Reliability Engineer</li><li>Platform Engineer</li><li>MLOps / AIOps Engineer</li><li>DevSecOps Engineer</li></ul></article>
+            <article class="card"><div class="icon">🏆</div><h3>Portfolio Benefits</h3><ul><li>GitHub portfolio</li><li>Multiple mini projects</li><li>One complete capstone</li><li>Professional documentation</li><li>Demo-ready architecture</li></ul></article>
+          </div>
+        </div>
+      </section>
+
+      <section id="capstone">
+        <div class="container">
+          <div class="panel capstone">
+            <div>
+              <div class="kicker">Final Capstone</div>
+              <h2>AI-Powered DevOps Control Center</h2>
+              <p class="lead">
+                Learners build a complete intelligent DevOps system that combines GitHub, CI/CD, Docker, Kubernetes, monitoring, security scanning, anomaly detection, AI-generated incident summaries, and runbook recommendations.
+              </p>
+              <div class="capstone-list">
+                <div class="capstone-item">GitHub repository</div>
+                <div class="capstone-item">CI/CD pipeline</div>
+                <div class="capstone-item">Dockerized application</div>
+                <div class="capstone-item">Kubernetes deployment</div>
+                <div class="capstone-item">Prometheus + Grafana</div>
+                <div class="capstone-item">Logging system</div>
+                <div class="capstone-item">Anomaly detection</div>
+                <div class="capstone-item">AI incident summary</div>
+                <div class="capstone-item">Runbook recommendation</div>
+                <div class="capstone-item">Security scan</div>
+              </div>
+            </div>
+            <div class="architecture">
+              <svg width="100%" height="100%" viewBox="0 0 620 420" role="img" aria-label="Capstone architecture diagram">
+                <defs>
+                  <linearGradient id="box" x1="0" x2="1" y1="0" y2="1"><stop offset="0" stop-color="#172554"/><stop offset="1" stop-color="#0f172a"/></linearGradient>
+                  <linearGradient id="flow" x1="0" x2="1"><stop offset="0" stop-color="#20e3ff"/><stop offset="1" stop-color="#ff9f43"/></linearGradient>
+                  <filter id="sg"><feDropShadow dx="0" dy="12" stdDeviation="12" flood-color="#000" flood-opacity=".35"/></filter>
+                </defs>
+                <rect x="36" y="44" width="150" height="58" rx="18" fill="url(#box)" stroke="rgba(255,255,255,.18)" filter="url(#sg)"/>
+                <text x="111" y="78" fill="#eef6ff" text-anchor="middle" font-family="Inter, sans-serif" font-weight="800" font-size="15">GitHub Repo</text>
+                <rect x="234" y="44" width="150" height="58" rx="18" fill="url(#box)" stroke="rgba(255,255,255,.18)" filter="url(#sg)"/>
+                <text x="309" y="78" fill="#eef6ff" text-anchor="middle" font-family="Inter, sans-serif" font-weight="800" font-size="15">CI/CD Pipeline</text>
+                <rect x="432" y="44" width="150" height="58" rx="18" fill="url(#box)" stroke="rgba(255,255,255,.18)" filter="url(#sg)"/>
+                <text x="507" y="78" fill="#eef6ff" text-anchor="middle" font-family="Inter, sans-serif" font-weight="800" font-size="15">Docker Image</text>
+
+                <rect x="132" y="176" width="150" height="58" rx="18" fill="url(#box)" stroke="rgba(255,255,255,.18)" filter="url(#sg)"/>
+                <text x="207" y="210" fill="#eef6ff" text-anchor="middle" font-family="Inter, sans-serif" font-weight="800" font-size="15">Kubernetes</text>
+                <rect x="338" y="176" width="150" height="58" rx="18" fill="url(#box)" stroke="rgba(255,255,255,.18)" filter="url(#sg)"/>
+                <text x="413" y="210" fill="#eef6ff" text-anchor="middle" font-family="Inter, sans-serif" font-weight="800" font-size="15">Observability</text>
+
+                <rect x="72" y="314" width="166" height="64" rx="20" fill="rgba(32,227,255,.12)" stroke="rgba(32,227,255,.45)" filter="url(#sg)"/>
+                <text x="155" y="340" fill="#dffbff" text-anchor="middle" font-family="Inter, sans-serif" font-weight="900" font-size="15">AIOps Engine</text>
+                <text x="155" y="361" fill="#a9b7cc" text-anchor="middle" font-family="Inter, sans-serif" font-size="12">Anomaly + RCA</text>
+
+                <rect x="382" y="314" width="166" height="64" rx="20" fill="rgba(255,159,67,.12)" stroke="rgba(255,159,67,.45)" filter="url(#sg)"/>
+                <text x="465" y="340" fill="#ffe6bd" text-anchor="middle" font-family="Inter, sans-serif" font-weight="900" font-size="15">AI Assistant</text>
+                <text x="465" y="361" fill="#a9b7cc" text-anchor="middle" font-family="Inter, sans-serif" font-size="12">Summary + Runbook</text>
+
+                <g stroke="url(#flow)" stroke-width="4" fill="none" stroke-linecap="round" stroke-linejoin="round" opacity=".9">
+                  <path d="M186 73 H234"/><path d="M384 73 H432"/>
+                  <path d="M507 102 C507 142 446 148 413 176"/>
+                  <path d="M309 102 C309 145 245 148 207 176"/>
+                  <path d="M207 234 C197 270 170 285 155 314"/>
+                  <path d="M413 234 C426 270 450 288 465 314"/>
+                  <path d="M238 346 H382" stroke-dasharray="8 10"/>
+                </g>
+                <g fill="#20e3ff"><circle cx="210" cy="73" r="5"/><circle cx="410" cy="73" r="5"/><circle cx="242" cy="150" r="5"/><circle cx="424" cy="280" r="5"/></g>
+              </svg>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <div class="container">
+          <div class="section-head">
+            <div>
+              <div class="kicker">Assessment Plan</div>
+              <h2>Project-based evaluation with measurable outcomes.</h2>
+            </div>
+            <p>Assessment is designed around weekly troubleshooting tasks, labs, quizzes, project submissions, and a final demo.</p>
+          </div>
+          <div class="panel" style="padding: 0;">
+            <table class="rubric" aria-label="Final capstone evaluation rubric">
+              <thead><tr><th>Evaluation Area</th><th>Weight</th></tr></thead>
+              <tbody>
+                <tr><td>CI/CD pipeline implementation</td><td>15%</td></tr>
+                <tr><td>Docker and Kubernetes deployment</td><td>20%</td></tr>
+                <tr><td>Monitoring and observability</td><td>15%</td></tr>
+                <tr><td>AI / AIOps feature quality</td><td>20%</td></tr>
+                <tr><td>Security and safety controls</td><td>10%</td></tr>
+                <tr><td>Documentation and GitHub portfolio</td><td>10%</td></tr>
+                <tr><td>Final presentation and demo</td><td>10%</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <section id="delivery">
+        <div class="container">
+          <div class="section-head">
+            <div>
+              <div class="kicker">Delivery Model</div>
+              <h2>Flexible formats for the learners and corporate partners.</h2>
+            </div>
+            <p>The same course can be adapted into a self-paced course, live cohort bootcamp, or corporate training package.</p>
+          </div>
+          <div class="delivery">
+            <article class="price-card"><span class="label">Option 1</span><h3>Self-Paced Course</h3><p>Best for flexible online learning with recorded content and structured assignments.</p><ul><li>Recorded videos</li><li>Labs and quizzes</li><li>Capstone guide</li><li>Certificate</li></ul></article>
+            <article class="price-card featured"><span class="label">Recommended</span><h3>Live Cohort Bootcamp</h3><p>Best for stronger learner outcomes, mentor feedback, and portfolio accountability.</p><ul><li>12 weeks</li><li>Weekly live mentoring</li><li>Live debugging sessions</li><li>Capstone review</li></ul></article>
+            <article class="price-card"><span class="label">Option 3</span><h3>Corporate Training</h3><p>Best for company teams that want practical automation and AI-enabled DevOps workflows.</p><ul><li>4–6 week intensive</li><li>Company-specific use cases</li><li>Internal automation workflows</li><li>Custom capstone</li></ul></article>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <div class="container">
+          <div class="cta">
+            <div>
+              <div class="kicker">Proposal Closing</div>
+              <h2>Position QuanSkill at the front of AI-powered DevOps education.</h2>
+              <p>
+                This course expands QuanSkill's catalog into a high-demand professional upskilling category by connecting AI learning with real deployment, infrastructure, reliability, and automation skills.
+              </p>
+              <p class="print-note">Prepared as a shareable HTML course proposal page.</p>
+            </div>
+            <a class="btn btn-primary" href="#top">Back to Top</a>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <div class="container footer-inner">
+        <div>Prepared for <strong>QuanSkill</strong> · AI in DevOps Course Proposal</div>
+        <div>Theme: Intelligent Automation · AIOps · Cloud-Native SRE</div>
+      </div>
+    </footer>
+  </div>
+
+  <script>
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.animate([
+            { opacity: 0, transform: 'translateY(18px)' },
+            { opacity: 1, transform: 'translateY(0)' }
+          ], { duration: 650, easing: 'cubic-bezier(.2,.8,.2,1)', fill: 'forwards' });
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: .08 });
+    document.querySelectorAll('section .container > *').forEach(el => observer.observe(el));
+  </script>
+</body>
+</html>
